@@ -3,42 +3,65 @@
 <head>
   <meta charset="utf-8">
   <style>
+    :root {
+      color-scheme: light dark;
+      --text: #292a2e;
+      --text-subtle: #6b6e76;
+      --surface: #ffffff;
+      --track: #dddee1;
+      --accent: #1868db;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #cecfd2;
+        --text-subtle: #96999e;
+        --surface: #1f1f21;
+        --track: #3d3f43;
+        --accent: #669df1;
+      }
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
-      width: 300px;
+      width: 280px;
+      margin: 0;
       padding: 16px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-size: 14px;
-      color: #161b22;
-      background: #ffffff;
-      margin: 0;
+      color: var(--text);
+      background: var(--surface);
     }
 
     .row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      gap: 12px;
     }
 
     .label {
       font-weight: 600;
-      color: #161b22;
     }
 
-    .sublabel {
+    .sublabel,
+    .version {
       font-size: 12px;
-      color: #6b778c;
+      color: var(--text-subtle);
       margin-top: 4px;
     }
 
-    /* Toggle switch */
+    .version {
+      margin-top: 12px;
+      text-align: center;
+    }
+
     .toggle {
       position: relative;
-      display: inline-block;
+      flex: none;
       width: 44px;
       height: 24px;
     }
@@ -51,11 +74,8 @@
 
     .slider {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #dfe1e6;
+      inset: 0;
+      background-color: var(--track);
       border-radius: 24px;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -68,53 +88,23 @@
       width: 18px;
       left: 3px;
       bottom: 3px;
-      background-color: white;
+      background-color: #ffffff;
       border-radius: 50%;
       transition: transform 0.2s;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     input:checked + .slider {
-      background-color: #0052cc;
+      background-color: var(--accent);
     }
 
     input:checked + .slider::before {
       transform: translateX(20px);
     }
 
-    input:disabled + .slider {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #dfe1e6;
-      margin: 12px 0;
-    }
-
-    .site-info {
-      font-size: 12px;
-      color: #42526e;
-      font-family: 'Monaco', 'Menlo', monospace;
-      padding: 4px 6px;
-      background: #f4f5f7;
-      border-radius: 3px;
-      word-break: break-all;
-    }
-
-    .info-text {
-      font-size: 12px;
-      color: #6b778c;
-      line-height: 1.5;
-      margin-top: 12px;
-    }
-
-    .version {
-      font-size: 11px;
-      color: #8b949e;
-      margin-top: 12px;
-      text-align: center;
+    input:focus-visible + .slider {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -122,32 +112,15 @@
   <div class="row">
     <div>
       <div class="label">Jira History Diff</div>
-      <div class="sublabel">Highlight description changes</div>
+      <div class="sublabel">Word-level diffs in Jira Cloud issue history</div>
     </div>
     <label class="toggle">
-      <input type="checkbox" id="globalToggle">
+      <input type="checkbox" id="enabledToggle">
       <span class="slider"></span>
     </label>
   </div>
 
-  <hr>
-
-  <div class="row">
-    <div>
-      <div class="label">Enable on this site</div>
-      <div class="sublabel site-info" id="currentHost">Loading...</div>
-    </div>
-    <label class="toggle">
-      <input type="checkbox" id="siteToggle">
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <div class="info-text">
-    For <strong>self-hosted Jira</strong>, enable per-site to activate the extension on that domain.
-  </div>
-
-  <div class="version">v1.0.0</div>
+  <div class="version" id="version"></div>
 
   <script src="popup.js"></script>
 </body>
