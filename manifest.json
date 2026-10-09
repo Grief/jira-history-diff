@@ -36,7 +36,7 @@
         "*://*.atlassian.net/*"
       ],
       "js": [
-        "diff-match-patch.js",
+        "word-diff.js",
         "content.js"
       ],
       "css": [
