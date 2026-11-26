@@ -4,6 +4,22 @@ Browser extension that shows word-level, side-by-side diffs for text field chang
 
 Fork of [Jira History Diff](https://addons.mozilla.org/firefox/addon/jira-history-diff/) 1.0.0 by Prashant Yadav, MIT licensed.
 
+## Screenshots
+
+Jira's own view of a changed description:
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/before-dark.png">
+  <img alt="Jira history item without the extension: old and new description as two plain text blocks" src="docs/before-light.png">
+</picture>
+
+The same history item with the extension:
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/after-dark.png">
+  <img alt="The same history item with the extension: two panes with the changed word highlighted" src="docs/after-light.png">
+</picture>
+
 ## What it does
 
 - Replaces the "old → new" value row of a history item with two panes, keeping the author, field name and time visible.
